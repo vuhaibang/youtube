@@ -150,7 +150,7 @@ def gen_video_from_url_image(url_deses, title_video):
     list_audio = [os.path.join(audio_path, l) for l in list_audio]
     path_audio = random.choice(list_audio)
     # audio = mpe.AudioFileClip(path_audio).set_duration(concat_clip.duration)
-    audio = mpe.AudioFileClip(path_audio).set_duration(5000)
+    audio = mpe.AudioFileClip(path_audio).set_duration(50)
     concat_clip = concat_clip.set_audio(audio)
     concat_clip.write_videofile(path_video_out_put, fps=15, codec='libx264', threads=4)
 
