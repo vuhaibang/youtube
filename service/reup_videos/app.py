@@ -111,12 +111,14 @@ def gen_video():
 def gen_video_from_url_image(url_deses, title_video):
     path_video_out_put = f'/home/vuhaibangtk/youtube/videos/output/{title_video}.mp4'
     screensize = (1920, 1080)
-    clips = []
+
+    path_intro = f'/home/vuhaibangtk/youtube/videos/intro/fun_pic.mp4'
+    clips = [mpe.AudioFileClip(path_intro)]
     for url, des in url_deses:
         size_text = 80
         duration = min(12, max(7, len(des)))
         if len(des) < 1:
-            des = "Fun_Pic"
+            des = "Funy picture"
         line_text, text = replace_space_in_text(des)
 
         main_image = mpe.ImageClip(url).set_position(('center', 'center')).set_duration(duration)
@@ -130,6 +132,7 @@ def gen_video_from_url_image(url_deses, title_video):
             .set_position(("center", "top"))
         clip = mpe.CompositeVideoClip([back_ground_image, main_image, bottom_image, txt_mask])
         clips.append(clip)
+    clips.append(clip.set_duration(7))
 
     slided_clips = []
     for num, clip in enumerate(clips):

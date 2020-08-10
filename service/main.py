@@ -5,7 +5,14 @@ except:
     from download_image.app import get_all_url_image_site_brightside
     from reup_videos.app import gen_video_from_url_image
 
+import pandas as pd
 
-link = "https://brightside.me/wonder-films/15-facts-about-the-princess-diaries-that-will-make-you-fall-in-love-with-the-movie-all-over-again-798356/"
-title, url_des = get_all_url_image_site_brightside(link)
-gen_video_from_url_image(url_des, title)
+links_df = pd.read_csv("brightside_url.csv")['link']
+for link in links_df:
+    print(link)
+    try:
+        title, url_des = get_all_url_image_site_brightside(link)
+    except:
+        continue
+    print(len(url_des))
+    # gen_video_from_url_image(url_des, title)
