@@ -146,7 +146,7 @@ def gen_video_from_url_image(url_deses, title_video):
     path_audio = random.choice(list_audio)
     audio = mpe.AudioFileClip(path_audio).set_duration(concat_clip.duration)
     concat_clip = concat_clip.set_audio(audio)
-    concat_clip.write_videofile(path_video_out_put, fps=30, codec='libx264', threads=4)
+    concat_clip.write_videofile(path_video_out_put, fps=15, codec='libx264', threads=4)
 
 if __name__ == '__main__':
     conn_brightside = sqlite3.connect('./../../database/brightside.db')
