@@ -113,7 +113,7 @@ def gen_video_from_url_image(url_deses, title_video):
     screensize = (1920, 1080)
 
     path_intro = f'/home/vuhaibangtk/youtube/videos/intro/fun_pic.mp4'
-    clips = [mpe.AudioFileClip(path_intro)]
+    clips = []
     for url, des in url_deses:
         size_text = 80
         duration = min(12, max(7, len(des)))
@@ -141,6 +141,8 @@ def gen_video_from_url_image(url_deses, title_video):
                 [clips[num + 1].set_start(clip.duration - 2), clip.fx(mpe.transfx.slide_out, 2, 'left')]))
         else:
             slided_clips.append(clip)
+    slided_clips.insert(0, mpe.AudioFileClip(path_intro))
+
 
     concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
     audio_path = '/home/vuhaibangtk/youtube/audio'
