@@ -109,7 +109,7 @@ def gen_video():
     concat_clip.write_videofile("test.mp4", fps=15, codec='libx264', threads=4)
 
 def gen_video_from_url_image(url_deses, title_video):
-    path_video_out_put = f'{title_video}.mp4'
+    path_video_out_put = f'/home/vuhaibangtk/youtube/videos/output/{title_video}.mp4'
     screensize = (1920, 1080)
     clips = []
     for url, des in url_deses:
@@ -123,7 +123,7 @@ def gen_video_from_url_image(url_deses, title_video):
         back_ground_image = mpe.ImageClip(url).resize(screensize).set_duration(duration).set_opacity(0.5)
         txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
         txt_mask = txt_mask.set_duration(duration).set_position("bottom", "center")
-        bottom_image = mpe.ImageClip("C:/Project/youtube/service/reup_videos/bottom.png").resize((1920, line_text * size_text + 20)).set_duration(
+        bottom_image = mpe.ImageClip("/home/vuhaibangtk/youtube/service/reup_videos/bottom.png").resize((1920, line_text * size_text + 20)).set_duration(
             duration).set_position(("center", "bottom"))
         main_image = main_image.resize(
             resize_center_image_in_video(main_image.w, main_image.h, 1920, 1080 - bottom_image.h))\
@@ -140,7 +140,7 @@ def gen_video_from_url_image(url_deses, title_video):
             slided_clips.append(clip)
 
     concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
-    audio_path = r'C:\Project\youtube\audio'
+    audio_path = '/home/vuhaibangtk/youtube/audio'
     list_audio = os.listdir(audio_path)
     list_audio = [os.path.join(audio_path, l) for l in list_audio]
     path_audio = random.choice(list_audio)
