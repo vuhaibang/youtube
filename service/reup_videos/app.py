@@ -3,8 +3,10 @@ import os
 import sqlite3
 import random
 import numpy as np
+from moviepy.config import change_settings
+change_settings({"IMAGEMAGICK_BINARY": r"/home/vhb/Downloads/magick"})
 
-conn_brightside = sqlite3.connect('./../../database/brightside.db')
+
 
 
 def select_sqlite(table, value, conn):
@@ -60,54 +62,89 @@ def resize_center_image_in_video(image_w, image_h, w, h):
     return (image_w, image_h)
 
 
-def generator_videos_from_images(dir_path):
-    pass
 
+def gen_video():
+    dir_path = '../../images/brightside.me/1'
+    conn = conn_brightside
+    list_images = sorted(os.listdir(dir_path))
+    list_text = [select_sqlite('images', int(l.replace(".png", "")), conn)[2] for l in
+                 list_images]
+    list_images = [os.path.join(dir_path, l) for l in list_images]
+    list_duration = [min(12, max(7, len(text))) for text in list_text]
+    list_all = list(zip(list_images, list_text, list_duration))
+    screensize = (1920, 1080)
+    clips = []
+    for m, text, duration in list_all:
+        duration = 7
+        size_text = 80
+        maskclip = mpe.ImageClip(m).set_position(('center', 'center')).set_duration(duration)
+        back_ground = mpe.ImageClip(m).resize(screensize).set_duration(duration).set_opacity(0.5)
 
-dir_path = '../../images/brightside.me/1'
-conn = conn_brightside
-list_images = sorted(os.listdir(dir_path))
-list_text = [select_sqlite('images', int(l.replace(".png", "")), conn)[2] for l in
-             list_images]
-list_images = [os.path.join(dir_path, l) for l in list_images]
-list_duration = [min(12, max(7, len(text))) for text in list_text]
-list_all = list(zip(list_images, list_text, list_duration))
-screensize = (1920, 1080)
+        line_text, text = replace_space_in_text(text)
+        txt = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
+        txt = txt.set_duration(duration).set_position("bottom", "center")
 
-clips = []
+        bottom = mpe.ImageClip("./bottom.png").resize((1920, line_text*size_text + 20)).set_duration(duration).set_position(("center", "bottom"))
+        maskclip = maskclip.resize(resize_center_image_in_video(maskclip.w, maskclip.h, 1920, 1080 - bottom.h)).set_position(("center", "top"))
 
+        clip = mpe.CompositeVideoClip([back_ground, maskclip, bottom, txt])
+        clips.append(clip)
 
+    slided_clips = []
+    for num, clip in enumerate(clips):
+        if num + 1 < len(clips):
+            slided_clips.append(mpe.CompositeVideoClip([clips[num+1].set_start(clip.duration - 2), clip.fx(mpe.transfx.slide_out, 2, 'left')]))
+        else:
+            slided_clips.append(clip)
 
+    concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
+    audio_path = '../../audio'
+    list_audio = os.listdir(audio_path)
+    list_audio = [os.path.join(audio_path, l) for l in list_audio]
+    path_audio = random.choice(list_audio)
+    audio = mpe.AudioFileClip(path_audio).set_duration(concat_clip.duration)
+    concat_clip = concat_clip.set_audio(audio)
+    concat_clip.write_videofile("test.mp4", fps=15, codec='libx264', threads=4)
 
-for m, text, duration in list_all:
-    duration = 7
-    size_text = 80
-    maskclip = mpe.ImageClip(m).set_position(('center', 'center')).set_duration(duration)
-    back_ground = mpe.ImageClip(m).resize(screensize).set_duration(duration).set_opacity(0.5)
+def gen_video_from_url_image(url_deses, title_video):
+    path_video_out_put = f'../../videos/output/{title_video}.mp4'
+    screensize = (1920, 1080)
+    clips = []
+    for url, des in url_deses:
+        size_text = 80
+        duration = min(12, max(7, len(des)))
+        if len(des) < 1:
+            des = "Fun_Pic"
+        line_text, text = replace_space_in_text(des)
 
-    line_text, text = replace_space_in_text(text)
-    txt = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
-    txt = txt.set_duration(duration).set_position("bottom", "center")
+        main_image = mpe.ImageClip(url).set_position(('center', 'center')).set_duration(duration)
+        back_ground_image = mpe.ImageClip(url).resize(screensize).set_duration(duration).set_opacity(0.5)
+        txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
+        txt_mask = txt_mask.set_duration(duration).set_position("bottom", "center")
+        bottom_image = mpe.ImageClip("./bottom.png").resize((1920, line_text * size_text + 20)).set_duration(
+            duration).set_position(("center", "bottom"))
+        main_image = main_image.resize(
+            resize_center_image_in_video(main_image.w, main_image.h, 1920, 1080 - bottom_image.h))\
+            .set_position(("center", "top"))
+        clip = mpe.CompositeVideoClip([back_ground_image, main_image, bottom_image, txt_mask])
+        clips.append(clip)
 
-    bottom = mpe.ImageClip("./bottom.png").resize((1920, line_text*size_text + 20)).set_duration(duration).set_position(("center", "bottom"))
-    maskclip = maskclip.resize(resize_center_image_in_video(maskclip.w, maskclip.h, 1920, 1080 - bottom.h)).set_position(("center", "top"))
+    slided_clips = []
+    for num, clip in enumerate(clips):
+        if num + 1 < len(clips):
+            slided_clips.append(mpe.CompositeVideoClip(
+                [clips[num + 1].set_start(clip.duration - 2), clip.fx(mpe.transfx.slide_out, 2, 'left')]))
+        else:
+            slided_clips.append(clip)
 
-    clip = mpe.CompositeVideoClip([back_ground, maskclip, bottom, txt])
-    clips.append(clip)
+    concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
+    audio_path = '../../audio'
+    list_audio = os.listdir(audio_path)
+    list_audio = [os.path.join(audio_path, l) for l in list_audio]
+    path_audio = random.choice(list_audio)
+    audio = mpe.AudioFileClip(path_audio).set_duration(concat_clip.duration)
+    concat_clip = concat_clip.set_audio(audio)
+    concat_clip.write_videofile(path_video_out_put, fps=30, codec='libx264', threads=4)
 
-slided_clips = []
-for num, clip in enumerate(clips):
-    if num + 1 < len(clips):
-        slided_clips.append(mpe.CompositeVideoClip([clips[num+1].set_start(clip.duration - 2), clip.fx(mpe.transfx.slide_out, 2, 'left')]))
-    else:
-        slided_clips.append(clip)
-
-concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
-audio_path = '../../audio'
-list_audio = os.listdir(audio_path)
-list_audio = [os.path.join(audio_path, l) for l in list_audio]
-path_audio = random.choice(list_audio)
-audio = mpe.AudioFileClip(path_audio).set_duration(concat_clip.duration)
-concat_clip = concat_clip.set_audio(audio)
-
-concat_clip.write_videofile("test.mp4", fps=15, codec='libx264', threads=4)
+if __name__ == '__main__':
+    conn_brightside = sqlite3.connect('./../../database/brightside.db')

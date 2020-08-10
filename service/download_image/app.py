@@ -9,8 +9,10 @@ import os
 import cv2
 import sqlite3
 
-conn = sqlite3.connect('./../../database/brightside.db')
-
+conn = sqlite3.connect('/home/vhb/PycharmProjects/Project/youtube/database/brightside.db')
+from pyvirtualdisplay import Display
+display = Display(visible=0, size=(1024, 768))
+display.start()
 
 def get_all_url_image_site_brightside(url_site):
     response = requests.get(url_site)
@@ -19,41 +21,33 @@ def get_all_url_image_site_brightside(url_site):
     result = []
 
     text_script = str(soup.find_all("script"))
-    text_script = text_script.split(title)[1].split('"type":"html"')
+    text_script = text_script.split(title)[1]
+    text_script = text_script.split('"type":"html"')
     for data in text_script:
         if '"subtype":"default","data":{"text"' in data and 'url' in data:
             try:
-                link = \
-                re.findall('https://wl-brightside.cf.tsp.li/.{0,100}\.jpg', data)[0]
-                des = data.split('"\\u003c')[1] \
-                    .replace("\\u003c", "") \
-                    .replace("em>", "") \
-                    .replace('"', "") \
-                    .replace("/", "") \
-                    .replace("h3", "") \
-                    .replace(">", "") \
-                    .replace("style=\\text-align: center;\\", "") \
-                    .split("}}")[0].strip()
+                link = re.findall('https://wl-brightside.cf.tsp.li/.{0,100}\.jpg', data)[0]
+                des = data.split('"\\u003c')[1]\
+                    .split("}}")[0]
+                des = re.sub(r"h3 style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|\&\#[^\s]*", "", des)\
+                    .strip().strip('"').strip("'")
+                des = re.sub(r"\s+", " ", des)
+                des = re.sub(r"^[0-9]+\s{0,1}\.", "",des)
+                des = des.strip().strip("'").strip('"')
                 result.append([link, des])
-            except:
-                pass
+            except Exception as e:
+                print(e)
             continue
         try:
             if len(result[-1][1]) > 0 and len(result[-1][1]) < 4:
-                # result[-1][1] += re.sub(r"\", "",
-                #                         data.split('"\\u003c')[1] \
-                #                         .replace("\u003cp", "") \
-                #                         .replace("em>", "") \
-                #                         .replace('"', "") \
-                #                         .replace("/", "") \
-                #                         .replace("h3", "") \
-                #                         .replace(">", "") \
-                #                         .replace("style=\\text-align: center;\\", "") \
-                #                         .split("}}")[0].strip())
-                pass
+                data = re.sub(r"\\u003ca.*\\u003c\/a\>", "", data)
+                data = re.findall(r"\\u003cp\>(.*)\\u003c\/p\>", data)[0]
+                data = re.sub(r"h[0-9] style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;", "", data)\
+                    .strip().strip('"').strip("'")
+                data = re.sub(r"\s+", " ", data)
+                result[-1][1] += data
         except:
             pass
-
     return title, result
 
 
@@ -68,7 +62,7 @@ def get_all_new_from_brightside():
     driver = webdriver.Firefox()
     driver.get(url)
     body = driver.find_element_by_css_selector('body')
-    for i in range(2000):
+    for i in range(10):
         body.send_keys(Keys.PAGE_DOWN)
         time.sleep(0.1)
     links = driver.find_elements_by_xpath("//a[@href]")
@@ -147,5 +141,8 @@ def resize_image(path):
 
 
 # save_image_from_brightside()
-link = "https://brightside.me/wonder-films/15-facts-about-the-princess-diaries-that-will-make-you-fall-in-love-with-the-movie-all-over-again-798356/"
-print(get_all_url_image_site_brightside(link)[1])
+if __name__ == '__main__':
+    for link in get_all_new_from_brightside():
+        print(link)
+        for des in get_all_url_image_site_brightside(link)[1]:
+            print(des)

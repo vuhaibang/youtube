@@ -1,0 +1,10 @@
+1597053837270	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.K9Nz7SdnLftj"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597053838766	Marionette	INFO	Listening on port 46205
+1597053838775	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597053848574	Marionette	INFO	Stopped listening on port 46205
+1597053911322	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.PCZvzIwUVlEG"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597053912821	Marionette	INFO	Listening on port 37089
+1597053912827	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597053923228	Marionette	INFO	Stopped listening on port 37089

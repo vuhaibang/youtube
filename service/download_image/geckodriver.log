@@ -1,0 +1,149 @@
+1597032259581	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.wYH9CWUBXQeA"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597032261122	Marionette	INFO	Listening on port 46215
+1597032261185	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597032494821	Marionette	INFO	Stopped listening on port 46215
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x5B0005,name=PHttpChannel::Msg_Cancel) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x5B000D,name=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+1597032612421	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.M1QUXx0qspY1"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597032613927	Marionette	INFO	Listening on port 35115
+1597032614027	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597032624942	Marionette	INFO	Stopped listening on port 35115
+1597033087225	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.nYaN9Ew3m45X"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597033088798	Marionette	INFO	Listening on port 37241
+1597033088831	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597033101152	Marionette	INFO	Stopped listening on port 37241
+1597033256386	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.SgDYSX8xfNm8"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597033257981	Marionette	INFO	Listening on port 37813
+1597033257992	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597033267036	Marionette	INFO	Stopped listening on port 37813
+1597033302194	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.i5AchnQ9HCbf"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597033303850	Marionette	INFO	Listening on port 40087
+1597033303900	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597033312642	Marionette	INFO	Stopped listening on port 40087
+1597033448317	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.n9wr1BVEeVU9"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597033449870	Marionette	INFO	Listening on port 34979
+1597033449921	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597033460216	Marionette	INFO	Stopped listening on port 34979
+1597035399652	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.7yVJPOdGtinv"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597035401107	Marionette	INFO	Listening on port 37965
+1597035401156	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597035414877	Marionette	INFO	Stopped listening on port 37965
+1597035606353	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.loWICvtAJtdA"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597035607872	Marionette	INFO	Listening on port 46053
+1597035607958	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597035621879	Marionette	INFO	Stopped listening on port 46053
+1597042942709	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.L2Y6fgdNfwDr"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597042944417	Marionette	INFO	Listening on port 34973
+1597042944514	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597042965214	Marionette	INFO	Stopped listening on port 34973
+1597042987714	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.skOKAdMb4cST"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597042989269	Marionette	INFO	Listening on port 38693
+1597042989318	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597042994761	Marionette	INFO	Stopped listening on port 38693
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+1597043099164	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.PH9Psp6iBsG5"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597043100770	Marionette	INFO	Listening on port 45845
+1597043100868	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597043112190	Marionette	INFO	Stopped listening on port 45845
+1597043384013	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.Ol6vhoFFzD3e"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597043385665	Marionette	INFO	Listening on port 46467
+1597043385724	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597043408084	Marionette	INFO	Stopped listening on port 46467
+JavaScript error: , line 0: uncaught exception: undefined
+1597043571973	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.IuNQyyXNRlLs"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597043573455	Marionette	INFO	Listening on port 40963
+1597043573479	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597043579338	Marionette	INFO	Stopped listening on port 40963
+1597043864268	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.DEHAQadUtdXC"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597043865713	Marionette	INFO	Listening on port 32989
+1597043865772	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597043871367	Marionette	INFO	Stopped listening on port 32989
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1597043908277	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.fIDvko4lbxUn"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597043909761	Marionette	INFO	Listening on port 43311
+1597043909781	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597043935765	Marionette	INFO	Stopped listening on port 43311
+1597044099932	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.moGTQrEJcYJA"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597044101470	Marionette	INFO	Listening on port 34293
+1597044101536	Marionette	WARN	TLS certificate errors will be ignored for this session
+Gdk-Message: 14:21:44.345: /usr/lib/firefox/firefox: Fatal IO error 11 (Resource temporarily unavailable) on X server :8.
+
+Gdk-Message: 14:21:44.345: /usr/lib/firefox/firefox: Fatal IO error 11 (Resource temporarily unavailable) on X server :8.
+
+Exiting due to channel error.
+1597044105848	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.piczGsOOSHKz"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597044107324	Marionette	INFO	Listening on port 42275
+1597044107352	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597044119114	Marionette	INFO	Stopped listening on port 42275
+1597044272885	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.M2YCiGcgTHFo"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597044274320	Marionette	INFO	Listening on port 46017
+1597044274420	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597044284656	Marionette	INFO	Stopped listening on port 46017
+1597045016137	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.37KQBSMFEgC7"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1597045017721	Marionette	INFO	Listening on port 45839
+1597045017741	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
