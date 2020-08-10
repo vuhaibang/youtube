@@ -1,4 +1,4 @@
-pytube3==9.6.4
+pytube3==9.5.5
 beautifulsoup4==4.9.1
 selenium==3.141.0
 moviepy==1.0.3
