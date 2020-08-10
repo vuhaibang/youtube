@@ -6,8 +6,13 @@ except:
     from reup_videos.app import gen_video_from_url_image
 
 import pandas as pd
+import time
+
 
 links_df = pd.read_csv("brightside_url.csv")['link']
+
+
+t = time.time()
 for link in links_df:
     print(link)
     try:
@@ -16,3 +21,4 @@ for link in links_df:
         continue
     print(len(url_des))
     # gen_video_from_url_image(url_des, title)
+print(f"Tong time {time.time() - t} s")
