@@ -20,5 +20,5 @@ for link in links_df:
     except:
         continue
     print(len(url_des))
-    # gen_video_from_url_image(url_des, title)
+    gen_video_from_url_image(url_des, title)
 print(f"Tong time {time.time() - t} s")
