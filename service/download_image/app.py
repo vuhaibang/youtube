@@ -9,10 +9,6 @@ import os
 import cv2
 import sqlite3
 
-conn = sqlite3.connect('/home/vhb/PycharmProjects/Project/youtube/database/brightside.db')
-from pyvirtualdisplay import Display
-display = Display(visible=0, size=(1024, 768))
-display.start()
 
 def get_all_url_image_site_brightside(url_site):
     response = requests.get(url_site)
@@ -142,6 +138,13 @@ def resize_image(path):
 
 # save_image_from_brightside()
 if __name__ == '__main__':
+    conn = sqlite3.connect(
+        '/home/vhb/PycharmProjects/Project/youtube/database/brightside.db')
+    from pyvirtualdisplay import Display
+
+    display = Display(visible=0, size=(1024, 768))
+    display.start()
+
     for link in get_all_new_from_brightside():
         print(link)
         for des in get_all_url_image_site_brightside(link)[1]:

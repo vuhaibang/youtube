@@ -1,5 +1,9 @@
-from youtube.service.download_image.app import get_all_url_image_site_brightside
-from youtube.service.reup_videos.app import gen_video_from_url_image
+try:
+    from youtube.service.download_image.app import get_all_url_image_site_brightside
+    from youtube.service.reup_videos.app import gen_video_from_url_image
+except:
+    from download_image.app import get_all_url_image_site_brightside
+    from reup_videos.app import gen_video_from_url_image
 
 
 link = "https://brightside.me/wonder-films/15-facts-about-the-princess-diaries-that-will-make-you-fall-in-love-with-the-movie-all-over-again-798356/"
