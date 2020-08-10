@@ -6,7 +6,8 @@ import numpy as np
 from moviepy.config import change_settings
 if os.path.isdir("/home/vhb/Downloads/"):
     change_settings({"IMAGEMAGICK_BINARY": r"/home/vhb/Downloads/magick"})
-
+elif os.path.isdir("/home/vuhaibangtk/Downloads/"):
+    change_settings({"IMAGEMAGICK_BINARY": r"/home/vuhaibangtk/Downloads/magick"})
 
 
 
