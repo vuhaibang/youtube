@@ -141,7 +141,7 @@ def gen_video_from_url_image(url_deses, title_video):
                 [clips[num + 1].set_start(clip.duration - 2), clip.fx(mpe.transfx.slide_out, 2, 'left')]))
         else:
             slided_clips.append(clip)
-    slided_clips.insert(0, mpe.AudioFileClip(path_intro))
+    slided_clips.insert(0, mpe.VideoFileClip(path_intro))
 
 
     concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
