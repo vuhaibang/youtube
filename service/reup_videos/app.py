@@ -6,9 +6,10 @@ import numpy as np
 from moviepy.config import change_settings
 if os.path.isdir("/home/vhb/Downloads/"):
     change_settings({"IMAGEMAGICK_BINARY": r"/home/vhb/Downloads/magick"})
-elif os.path.isdir("/home/vuhaibangtk/Downloads/"):
+elif os.path.isfile("/home/vuhaibangtk/Downloads/magick"):
     change_settings({"IMAGEMAGICK_BINARY": r"/home/vuhaibangtk/Downloads/magick"})
-
+elif os.path.isfile("/home/vuhaibangtk/youtube/magick"):
+    change_settings({"IMAGEMAGICK_BINARY": r"/home/vuhaibangtk/youtube/magick"})
 
 
 def select_sqlite(table, value, conn):
