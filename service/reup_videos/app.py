@@ -112,7 +112,7 @@ def gen_video():
 def gen_video_from_url_image(url_deses, title_video):
     if os.path.isdir('/home/vuhaibangtk/'):
         audio_path = '/home/vuhaibangtk/youtube/audio'
-        path_video_out_put = f'/home/vuhaibangtk/youtube/videos/output/{title_video}.mp4'
+        path_video_out_put = f'/home/vuhaibangtk/{title_video}.mp4'
         path_intro = f'/home/vuhaibangtk/youtube/videos/intro/fun_pic.mp4'
         bottom_path = "/home/vuhaibangtk/youtube/service/reup_videos/bottom.png"
     elif os.path.isdir('/home/vhb/'):
