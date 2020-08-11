@@ -7,13 +7,13 @@ except:
 
 import pandas as pd
 import time
-
+import platform
 
 links_df = pd.read_csv("brightside_url.csv")['link']
 
 
 t = time.time()
-
+print(platform.node())
 def gen_video(link):
     print(link)
     try:

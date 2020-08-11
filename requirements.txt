@@ -6,3 +6,4 @@ pandas
 cmake
 opencv-python
 pyvirtualdisplay
+gitpython
