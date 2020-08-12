@@ -124,7 +124,7 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
     audio = mpe.afx.audio_loop(audio, duration=concat_clip.duration)
     concat_clip = concat_clip.set_audio(audio).subclip(100,120)
 
-    concat_clip.write_videofile(path_video_out_put, fps=1, codec='libx264', threads=2)
+    concat_clip.write_videofile(path_video_out_put, fps=24, codec='libx264', threads=4)
 if __name__ == '__main__':
     conn_brightside = sqlite3.connect('./../../database/brightside.db')
     add_audio_in_videos("../../videos/videos/St319/1.mp4", "../../videos/audio/St319/1.mp4", "test.mp4")
