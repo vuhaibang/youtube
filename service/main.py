@@ -19,6 +19,8 @@ def gen_video(stt, title, link):
             title = f"Let's smile: Step {stt} {title}"
         elif platform.node() == "funpic":
             title = f"Funny pics: Step {stt} {title}"
+        else:
+            title = f"Funny pics: Step {stt} {title}"
         print(title)
         print(link)
         print(len(url_des))
@@ -31,13 +33,12 @@ def gen_video(stt, title, link):
 
 def handle():
     t = time.time()
-    links_df = []
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
     else:
-        pass
+        links_df = pd.read_csv("smile.csv")
     for index, row in links_df.iterrows():
         stt = row['STT']
         title = row['Title']

@@ -95,11 +95,12 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
             txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
             bottom_image = mpe.ImageClip(bottom_path).resize((screensize[0], line_text * size_text + int(screensize[0]/80)))\
                 .set_duration(duration).set_position("bottom", "center")
-            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h- 5))
+            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h - 2.5))
             main_image = main_image.resize(
                 resize_center_image_in_video(main_image.w, main_image.h, screensize[0], screensize[1] - bottom_image.h))\
                 .set_position(("center", "top"))
             clip = mpe.CompositeVideoClip([back_ground_image, main_image, bottom_image, txt_mask])
+            clip.get_frame(12)
         except:
             continue
         clips.append(clip)
@@ -121,9 +122,9 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
     path_audio = random.choice(list_audio)
     audio = mpe.AudioFileClip(path_audio)
     audio = mpe.afx.audio_loop(audio, duration=concat_clip.duration)
-    concat_clip = concat_clip.set_audio(audio)
+    concat_clip = concat_clip.set_audio(audio).subclip(100,120)
 
-    concat_clip.write_videofile(path_video_out_put, fps=24, codec='libx264')
+    concat_clip.write_videofile(path_video_out_put, fps=1, codec='libx264')
 if __name__ == '__main__':
     conn_brightside = sqlite3.connect('./../../database/brightside.db')
     add_audio_in_videos("../../videos/videos/St319/1.mp4", "../../videos/audio/St319/1.mp4", "test.mp4")
