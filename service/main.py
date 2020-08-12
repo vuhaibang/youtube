@@ -31,7 +31,7 @@ def gen_video(stt, title, link):
 
 def handle():
     t = time.time()
-    links_df = pd.read_csv("day1.csv")
+    links_df = []
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
     elif platform.node() == "smile":
