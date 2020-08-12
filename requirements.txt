@@ -4,6 +4,6 @@ selenium==3.141.0
 moviepy==1.0.3
 pandas
 cmake
-opencv-python==4.3.0
+opencv-python
 pyvirtualdisplay
 gitpython
