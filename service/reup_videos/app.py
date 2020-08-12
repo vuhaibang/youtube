@@ -95,7 +95,7 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
             txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
             bottom_image = mpe.ImageClip(bottom_path).resize((screensize[0], line_text * size_text + int(screensize[0]/80)))\
                 .set_duration(duration).set_position("bottom", "center")
-            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h))
+            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h - (bottom_image.h - txt_mask.h)/2))
             main_image = main_image.resize(
                 resize_center_image_in_video(main_image.w, main_image.h, screensize[0], screensize[1] - bottom_image.h))\
                 .set_position(("center", "top"))
