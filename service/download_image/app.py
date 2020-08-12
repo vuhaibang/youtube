@@ -25,7 +25,8 @@ def get_all_url_image_site_brightside(url_site):
                 link = re.findall('https://wl-brightside.cf.tsp.li/.{0,100}\.jpg', data)[0]
                 des = data.split('"\\u003c')[1]\
                     .split("}}")[0]
-                des = re.sub(r"h3 style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|\&\#[^\s]*", "", des)\
+                des = re.sub(r"h3 style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|\\n|"
+                             r"ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|\&\#[^\s]*|h3.class\=[^\s]+|style\=[^\s]+", "", des)\
                     .strip().strip('"').strip("'")
                 des = re.sub(r"\s+", " ", des)
                 des = re.sub(r"^[0-9]+\s{0,1}\.", "",des)
@@ -38,7 +39,8 @@ def get_all_url_image_site_brightside(url_site):
             if len(result[-1][1]) > 0 and len(result[-1][1]) < 4:
                 data = re.sub(r"\\u003ca.*\\u003c\/a\>", "", data)
                 data = re.findall(r"\\u003cp\>(.*)\\u003c\/p\>", data)[0]
-                data = re.sub(r"h[0-9] style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;", "", data)\
+                data = re.sub(r"h[0-9] style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|"
+                              r"\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|h3.class\=[^\s]+|style\=[^\s]+", "", data)\
                     .strip().strip('"').strip("'")
                 data = re.sub(r"\s+", " ", data)
                 result[-1][1] += data
