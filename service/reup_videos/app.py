@@ -95,7 +95,7 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
             txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
             bottom_image = mpe.ImageClip(bottom_path).resize((screensize[0], line_text * size_text + int(screensize[0]/80)))\
                 .set_duration(duration).set_position("bottom", "center")
-            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h + (bottom_image.h - txt_mask.h)/2))
+            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h + int((bottom_image.h - txt_mask.h)/2)))
             main_image = main_image.resize(
                 resize_center_image_in_video(main_image.w, main_image.h, screensize[0], screensize[1] - bottom_image.h))\
                 .set_position(("center", "top"))
@@ -124,7 +124,7 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
     audio = mpe.afx.audio_loop(audio, duration=concat_clip.duration)
     audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
                             audio.set_start(mpe.VideoFileClip(path_intro).duration)])
-    concat_clip = concat_clip.set_audio(audio).subclip(1, 10)
+    concat_clip = concat_clip.set_audio(audio).subclip(12, 16)
 
     concat_clip.write_videofile(path_video_out_put, fps=1, codec='libx264')
 if __name__ == '__main__':
