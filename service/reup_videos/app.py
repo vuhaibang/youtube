@@ -61,11 +61,11 @@ def resize_center_image_in_video(image_w, image_h, w, h):
     return (image_w, image_h)
 
 
-def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
+def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 1080)):
     if os.path.isdir('/home/vuhaibangtk/'):
         audio_path = '/home/vuhaibangtk/youtube/audio'
         path_video_out_put = f'/home/vuhaibangtk/videos/{title_video}.mp4'
-        path_intro = f'/home/vuhaibangtk/youtube/videos/intro/fun_pic.mp4'
+        path_intro = f'/home/vuhaibangtk/youtube/videos/intro/{intro}.mp4'
         bottom_path = "/home/vuhaibangtk/youtube/service/reup_videos/bottom.png"
     elif os.path.isdir('/home/vhb/'):
         audio_path = '/home/vhb/PycharmProjects/Project/youtube/audio'
