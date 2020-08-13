@@ -80,7 +80,7 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
 
     clips = []
     for url, des in url_deses:
-        duration = min(8, max(4, len(des)*4/50))
+        duration = min(8.5, max(4.5, len(des)*4.5/50))
         if len(des) < 1:
             des = "Funy picture"
         line_text, text = replace_space_in_text(des)
