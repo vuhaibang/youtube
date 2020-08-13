@@ -24,8 +24,8 @@ def gen_video(stt, title, link):
         print(title)
         print(link)
         print(len(url_des))
-        for url in url_des:
-            print(url, "\n")
+        # for url in url_des:
+        #     print(url, "\n")
         gen_video_from_url_image(url_des, title)
         return True
 
