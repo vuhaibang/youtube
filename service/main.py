@@ -25,8 +25,10 @@ def gen_video(stt, title, link):
         print(link)
         print(len(url_des))
         for url in url_des:
-            print(url)
-        gen_video_from_url_image(url_des, title)
+            print(url, "\n")
+        # gen_video_from_url_image(url_des, title)
+        return True
+
     except Exception as e:
         print(f"Loi {e}")
 
@@ -38,12 +40,17 @@ def handle():
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
     else:
-        links_df = pd.read_csv("smile.csv")
+        links_df = pd.read_csv("funpic.csv")
     for index, row in links_df.iterrows():
+        reup_df = pd.read_csv("reup_list.csv")
         stt = row['STT']
         title = row['Title']
         link = row['Link']
-        gen_video(stt, title, link)
+        if link in reup_df["LINK"].to_list():
+            continue
+        if (gen_video(stt, title, link)):
+            reup_df = reup_df.append(pd.DataFrame({"LINK": [link]}))
+            reup_df["LINK"].to_csv("reup_list.csv", index=False)
     print(f"Tong time {time.time() - t} s")
 
 

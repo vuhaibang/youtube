@@ -30,7 +30,7 @@ def get_all_url_image_site_brightside(url_site):
                     .strip().strip('"').strip("'")
                 des = re.sub(r"\s+", " ", des)
                 des = re.sub(r"^[0-9]+\s{0,1}\.", "",des)
-                des = des.strip().strip("'").strip('"')
+                des = des.strip().strip("'").strip('"').strip("”").strip("“")
                 result.append([link, des])
             except Exception as e:
                 print(e)
@@ -41,8 +41,8 @@ def get_all_url_image_site_brightside(url_site):
                 data = re.findall(r"\\u003cp\>(.*)\\u003c\/p\>", data)[0]
                 data = re.sub(r"h[0-9] style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|"
                               r"\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|h3.class\=[^\s]+|style\=[^\s]+", "", data)\
-                    .strip().strip('"').strip("'")
-                data = re.sub(r"\s+", " ", data)
+                    .strip().strip('"').strip("'").strip('“')
+                data = re.sub(r"\s+", " ", data).strip("”").strip("“")
                 result[-1][1] += data
         except:
             pass

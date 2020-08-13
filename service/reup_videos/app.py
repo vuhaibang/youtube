@@ -40,16 +40,16 @@ def add_audio_in_videos(path_video, path_audio, path_output):
 
 def replace_space_in_text(text):
     text = text.replace("\n", " ")
-    if len(text) < 50:
+    if len(text) < 55:
         return 1, text
     result = []
-    while len(text) > 50:
-        index_space = text[:50].rfind(" ")
+    line_text = int(len(text) / 50) + 1
+    string_in_line = int(len(text) / line_text)
+    for _ in range(0, line_text - 1):
+        index_space = text[:string_in_line].rfind(" ")
         result.append(text[:index_space])
-        text = text[index_space+1:]
-    if len(text) > 10:
-        result.append(text)
-    line_text = len(result)
+        text = text[index_space + 1:]
+    result.append(text)
     result = "\n".join(result)
     result = result.capitalize()
     return line_text, result
@@ -80,14 +80,12 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
 
     clips = []
     for url, des in url_deses:
-        duration = min(11, max(6, len(des)*7/50))
+        duration = min(8, max(4, len(des)*4/50))
         if len(des) < 1:
             des = "Funy picture"
         line_text, text = replace_space_in_text(des)
-        if line_text == 1:
-            size_text = int(screensize[0] / 30)
-        else:
-            size_text = int(screensize[0] / 40)
+        size_text = int(screensize[0] / 33)
+
 
         try:
             main_image = mpe.ImageClip(url).set_position(('center', 'center')).set_duration(duration)
@@ -100,17 +98,16 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
                 resize_center_image_in_video(main_image.w, main_image.h, screensize[0], screensize[1] - bottom_image.h))\
                 .set_position(("center", "top"))
             clip = mpe.CompositeVideoClip([back_ground_image, main_image, bottom_image, txt_mask])
-            clip.get_frame(12)
         except:
             continue
         clips.append(clip)
-    clips.append(clip.set_duration(7))
+    clips.append(clip.set_duration(6))
 
     slided_clips = []
     for num, clip in enumerate(clips):
         if num + 1 < len(clips):
             slided_clips.append(mpe.CompositeVideoClip(
-                [clips[num + 1].set_start(clip.duration - 2), clip.fx(mpe.transfx.slide_out, 2, 'left')]))
+                [clips[num + 1].set_start(clip.duration - 1), clip.fx(mpe.transfx.slide_out, 1, 'left')]))
         else:
             slided_clips.append(clip)
     slided_clips.insert(0, mpe.VideoFileClip(path_intro))
