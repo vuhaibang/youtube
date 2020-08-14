@@ -44,7 +44,7 @@ while True:
     else:
         if check_heal() == 'nok':
             print("Su dung tinh nang")
-            os.system('tmux attach-session -t reup \; send-key "python3 /home/youtube/service/main.py" Enter')
+            os.system('tmux new-session -d -s reup \; send-keys Enter "cd /home/youtube/service" Enter "python3 main.py" Enter')
     time.sleep(60*10)
 
 

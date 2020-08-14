@@ -37,22 +37,31 @@ def handle():
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
         intro = "fun_pic"
+        loop_df(links_df, intro)
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
         intro = "smile"
+        loop_df(links_df, intro)
     else:
-        links_df = pd.read_csv("funpic.csv")
-        intro = "smile"
-    for index, row in links_df.iterrows():
+        df = pd.read_csv("funpic.csv")
+        loop_df(df, "fun_pic")
+
+        df = pd.read_csv("smile.csv")
+        loop_df(df, "smile")
+
+
+
+def loop_df(df, intro):
+    for index, row in df.iterrows():
         reup_df = pd.read_csv("reup_list.csv")
         stt = row['STT']
         title = row['Title']
         link = row['Link']
-        if link in reup_df["LINK"].to_list():
+        if (intro + " " + link) in reup_df["LINK"].to_list():
             continue
         if (gen_video(stt, title, link, intro)):
-            reup_df = reup_df.append(pd.DataFrame({"LINK": [link]}))
-            reup_df["LINK"].to_csv("reup_list.csv", index=False)
+            reup_df = reup_df.append(pd.DataFrame({"LINK": [intro + " " + link]}))
+        reup_df["LINK"].to_csv("reup_list.csv", index=False)
         if update_repo():
             handle()
 
