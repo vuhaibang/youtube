@@ -32,7 +32,7 @@ while True:
     status = 'ok'
     if not check_percent_memory():
         status = 'nok'
-        for i in range(5):
+        for i in range(10):
             if check_percent_memory():
                 time.sleep(60)
                 continue
