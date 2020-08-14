@@ -39,6 +39,10 @@ while True:
                 continue
             else:
                 status = 'ok'
+    else:
+        print(f"CPU {psutil.cpu_percent()}")
+        print(f"RAM {psutil.virtual_memory().percent}")
+
     print(f"Tinh trang {status}")
     if status == 'ok':
         time.sleep(60*3)
