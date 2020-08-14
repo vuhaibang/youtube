@@ -38,7 +38,7 @@ while True:
                 continue
             else:
                 status = 'ok'
-
+    print(status)
     if status == 'ok':
         time.sleep(60*5)
     else:

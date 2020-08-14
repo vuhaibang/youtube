@@ -36,27 +36,30 @@ def gen_video(stt, title, link, intro):
 def handle():
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
-        intro = "fun_pic"
-        loop_df(links_df, intro)
+        links_df['intro'] = "fun_pic"
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
-        intro = "smile"
-        loop_df(links_df, intro)
+        links_df['intro'] = "smile"
     else:
-        df = pd.read_csv("funpic.csv")
-        loop_df(df, "fun_pic")
+        FILES = ["funpic", "smile"]
 
-        df = pd.read_csv("smile.csv")
-        loop_df(df, "smile")
+        link_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
+        for file in FILES:
+            df = pd.read_csv(f"{file}.csv")
+            df['intro'] = file
+            link_df = link_df.append(df, ignore_index=True)
+    link_df = link_df.sort_values(by=['STT'])
+    loop_df(links_df)
 
 
 
-def loop_df(df, intro):
+def loop_df(df):
     for index, row in df.iterrows():
         reup_df = pd.read_csv("reup_list.csv")
         stt = row['STT']
         title = row['Title']
         link = row['Link']
+        intro = row['intro']
         if (intro + " " + link) in reup_df["LINK"].to_list():
             continue
         if (gen_video(stt, title, link, intro)):
