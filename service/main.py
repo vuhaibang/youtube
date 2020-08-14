@@ -43,12 +43,12 @@ def handle():
     else:
         FILES = ["funpic", "smile"]
 
-        link_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
+        links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:
             df = pd.read_csv(f"{file}.csv")
             df['intro'] = file
-            link_df = link_df.append(df, ignore_index=True)
-    link_df = link_df.sort_values(by=['STT'])
+            links_df = links_df.append(df, ignore_index=True)
+    links_df = links_df.sort_values(by=['STT'])
     loop_df(links_df)
 
 
