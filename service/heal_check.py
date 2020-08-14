@@ -22,35 +22,33 @@ def check_heal():
 
 
 def check_percent_memory():
-    if psutil.cpu_percent() < 40:
-        return True
-    else:
-        return False
-
+    a = psutil.cpu_percent(interval=2)
+    return a
 
 while True:
     status = 'ok'
-    if check_percent_memory():
-        print(f"CPU lower {psutil.cpu_percent()}")
+    if check_percent_memory() < 40:
+        print(f"CPU lower {check_percent_memory()}")
         status = 'nok'
         for i in range(10):
-            if check_percent_memory():
+            if check_percent_memory() < 40:
                 print(f"Kiem tra lan {i} nok")
-                time.sleep(60)
+                print(f"CPU {check_percent_memory()}")
+                time.sleep(15)
                 continue
             else:
                 status = 'ok'
     else:
-        print(f"CPU {psutil.cpu_percent()}")
+        print(f"CPU {check_percent_memory()}")
         print(f"RAM {psutil.virtual_memory().percent}")
 
     print(f"Tinh trang {status}")
     if status == 'ok':
-        time.sleep(60*3)
+        pass
     else:
         if check_heal() == 'nok':
             print("Su dung tinh nang")
             os.system('tmux send-keys -t ytb:reup Enter "cd /home/vuhaibangtk/youtube/service" Enter "python3 main.py" Enter')
-    time.sleep(60*10)
+    time.sleep(60*3)
 
 
