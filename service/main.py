@@ -82,7 +82,7 @@ def update_repo():
 import os
 handle()
 os.system("zip -r videos.zip /home/vuhaibangtk/videos | "
-          "rm -v /home/vuhaibangtk/videos | "
+          "rm -v /home/vuhaibangtk/videos/*.mp4 | "
           "mv videos.zip /home/vuhaibangtk/videos")
 while True:
     if update_repo():
