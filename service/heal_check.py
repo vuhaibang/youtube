@@ -45,7 +45,7 @@ while True:
     else:
         if check_heal() == 'nok':
             print("Su dung tinh nang")
-            os.system('tmux send-keys -t ytb Enter "tmux select-window -t heal_check" Enter "cd /home/vuhaibangtk/youtube/service" Enter "python3 heal_check.py" Enter')
+            os.system('tmux send-keys -t ytb:reup Enter "cd /home/vuhaibangtk/youtube/service" Enter "python3 main.py" Enter')
     time.sleep(60*10)
 
 
