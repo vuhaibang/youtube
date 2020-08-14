@@ -61,11 +61,11 @@ def resize_center_image_in_video(image_w, image_h, w, h):
     return (image_w, image_h)
 
 
-def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
+def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 1080)):
     if os.path.isdir('/home/vuhaibangtk/'):
         audio_path = '/home/vuhaibangtk/youtube/audio'
         path_video_out_put = f'/home/vuhaibangtk/videos/{title_video}.mp4'
-        path_intro = f'/home/vuhaibangtk/youtube/videos/intro/fun_pic.mp4'
+        path_intro = f'/home/vuhaibangtk/youtube/videos/intro/{intro}.mp4'
         bottom_path = "/home/vuhaibangtk/youtube/service/reup_videos/bottom.png"
     elif os.path.isdir('/home/vhb/'):
         audio_path = '/home/vhb/PycharmProjects/Project/youtube/audio'
@@ -80,7 +80,7 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
 
     clips = []
     for url, des in url_deses:
-        duration = min(8, max(4, len(des)*4/50))
+        duration = min(8.5, max(4.5, len(des)*4.5/50))
         if len(des) < 1:
             des = "Funy picture"
         line_text, text = replace_space_in_text(des)
@@ -125,7 +125,7 @@ def gen_video_from_url_image(url_deses, title_video, screensize = (1920, 1080)):
     print(concat_clip.duration)
     concat_clip = concat_clip.set_audio(audio)
 
-    concat_clip.write_videofile(path_video_out_put, fps=24, codec='libx264')
+    concat_clip.write_videofile(path_video_out_put, fps=24, codec='libx264', threads=2)
 if __name__ == '__main__':
     conn_brightside = sqlite3.connect('./../../database/brightside.db')
     add_audio_in_videos("../../videos/videos/St319/1.mp4", "../../videos/audio/St319/1.mp4", "test.mp4")

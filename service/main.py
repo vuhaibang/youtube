@@ -12,7 +12,7 @@ import time
 
 
 
-def gen_video(stt, title, link):
+def gen_video(stt, title, link, intro):
     try:
         _, url_des = get_all_url_image_site_brightside(link)
         if platform.node() == "smile":
@@ -26,7 +26,7 @@ def gen_video(stt, title, link):
         print(len(url_des))
         # for url in url_des:
         #     print(url, "\n")
-        gen_video_from_url_image(url_des, title)
+        gen_video_from_url_image(url_des, title, intro)
         return True
 
     except Exception as e:
@@ -37,10 +37,13 @@ def handle():
     t = time.time()
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
+        intro = "fun_pic"
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
+        intro = "smile"
     else:
         links_df = pd.read_csv("funpic.csv")
+        intro = "smile"
     for index, row in links_df.iterrows():
         reup_df = pd.read_csv("reup_list.csv")
         stt = row['STT']
@@ -48,7 +51,7 @@ def handle():
         link = row['Link']
         if link in reup_df["LINK"].to_list():
             continue
-        if (gen_video(stt, title, link)):
+        if (gen_video(stt, title, link, intro)):
             reup_df = reup_df.append(pd.DataFrame({"LINK": [link]}))
             reup_df["LINK"].to_csv("reup_list.csv", index=False)
     print(f"Tong time {time.time() - t} s")
