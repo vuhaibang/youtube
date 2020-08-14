@@ -22,7 +22,7 @@ def check_heal():
 
 
 def check_percent_memory():
-    if psutil.virtual_memory().percent < 25:
+    if psutil.virtual_memory().percent < 30:
         return True
     else:
         return False
@@ -30,17 +30,18 @@ def check_percent_memory():
 
 while True:
     status = 'ok'
-    if not check_percent_memory():
+    if check_percent_memory():
         status = 'nok'
         for i in range(10):
             if check_percent_memory():
+                print(f"Kiem tra lan {i} nok")
                 time.sleep(60)
                 continue
             else:
                 status = 'ok'
-    print(status)
+    print(f"Tinh trang {status}")
     if status == 'ok':
-        time.sleep(60*5)
+        time.sleep(60*3)
     else:
         if check_heal() == 'nok':
             print("Su dung tinh nang")
