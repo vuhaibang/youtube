@@ -34,7 +34,6 @@ def gen_video(stt, title, link, intro):
 
 
 def handle():
-    t = time.time()
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
         intro = "fun_pic"
@@ -54,19 +53,30 @@ def handle():
         if (gen_video(stt, title, link, intro)):
             reup_df = reup_df.append(pd.DataFrame({"LINK": [link]}))
             reup_df["LINK"].to_csv("reup_list.csv", index=False)
-    print(f"Tong time {time.time() - t} s")
+        if update_repo():
+            handle()
 
 
-# handle()
-while True:
+def update_repo():
     g = git.cmd.Git()
-    repo = git.Repo()
-    commit = repo.commit()
-    g.pull()
-    if commit != repo.commit():
-        print("Change")
-        handle()
+    a = g.pull()
+    if a == "Already up to date.":
+        print("khong thay doi")
+        return False
     else:
-        print("No change")
-        time.sleep(120)
+        print("co thay doi")
+        return True
+
+import os
+handle()
+os.system("zip -r videos.zip /home/vuhaibangtk/videos | "
+          "rm -v /home/vuhaibangtk/videos | "
+          "mv videos.zip /home/vuhaibangtk/videos")
+while True:
+    if update_repo():
+        handle()
+        os.system("zip -r videos.zip /home/vuhaibangtk/videos | "
+                  "rm -v /home/vuhaibangtk/videos | "
+                  "mv videos.zip /home/vuhaibangtk/videos")
+    time.sleep(60*5)
 
