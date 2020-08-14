@@ -14,9 +14,10 @@ def check_heal():
     for index, row in links_df.iterrows():
         reup_df = pd.read_csv("reup_list.csv")
         link = row['Link']
-        if link in reup_df["LINK"].to_list():
+        if (platform.node() + " " + link) in reup_df["LINK"].to_list():
             continue
         else:
+            print(f"Link {link} chua co")
             return "nok"
     return "ok"
 
