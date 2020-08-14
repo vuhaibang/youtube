@@ -17,7 +17,7 @@ def gen_video(stt, title, link, intro):
         _, url_des = get_all_url_image_site_brightside(link)
         if platform.node() == "smile":
             title = f"Let's smile: Step {stt} {title}"
-        elif platform.node() == "funpic":
+        elif platform.node() == "fun_pic":
             title = f"Funny pics: Step {stt} {title}"
         else:
             title = f"Funny pics: Step {stt} {title}"
