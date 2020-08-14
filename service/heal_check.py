@@ -5,20 +5,29 @@ import pandas as pd
 import os
 
 def check_heal():
+    reup_df = pd.read_csv("reup_list.csv")
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv")
+        links_df['intro'] = "fun_pic"
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
+        links_df['intro'] = "smile"
     else:
-        links_df = pd.read_csv("funpic.csv")
-    for index, row in links_df.iterrows():
-        reup_df = pd.read_csv("reup_list.csv")
-        link = row['Link']
-        if (platform.node() + " " + link) in reup_df["LINK"].to_list():
-            continue
-        else:
-            print(f"Link {link} chua co")
-            return "nok"
+        FILES = ["funpic", "smile"]
+
+        links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
+        for file in FILES:
+            df = pd.read_csv(f"{file}.csv")
+            df['intro'] = file
+            links_df = links_df.append(df, ignore_index=True)
+        for index, row in links_df.iterrows():
+            link = row['Link']
+            intro = row['intro']
+            if (intro + " " + link) in reup_df["LINK"].to_list():
+                continue
+            else:
+                print(f"Link {link} chua co")
+                return "nok"
     return "ok"
 
 
