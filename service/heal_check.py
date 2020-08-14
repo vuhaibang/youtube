@@ -31,6 +31,7 @@ def check_percent_memory():
 while True:
     status = 'ok'
     if check_percent_memory():
+        print(f"CPU lower {psutil.cpu_percent()}")
         status = 'nok'
         for i in range(10):
             if check_percent_memory():
