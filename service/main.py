@@ -54,11 +54,11 @@ def handle():
     print(f"Tong time {time.time() - t} s")
 
 
-handle()
+# handle()
 while True:
+    g = git.cmd.Git()
     repo = git.Repo()
     commit = repo.commit()
-    g = git.cmd.Git()
     g.pull()
     if commit != repo.commit():
         print("Change")
