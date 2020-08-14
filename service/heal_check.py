@@ -22,7 +22,7 @@ def check_heal():
 
 
 def check_percent_memory():
-    if psutil.virtual_memory().percent < 30:
+    if psutil.cpu_percent() < 40:
         return True
     else:
         return False
