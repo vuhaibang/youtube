@@ -86,13 +86,13 @@ def update_repo():
 import os
 handle()
 os.system("zip -r videos.zip /home/vuhaibangtk/videos/* | "
-          "rm -v /home/vuhaibangtk/videos/* | "
-          "mv ./videos.zip /home/vuhaibangtk/videos")
+          "rm -v /home/vuhaibangtk/videos/*")
+os.system("mv videos.zip /home/vuhaibangtk/videos")
 while True:
     if update_repo():
         handle()
         os.system("zip -r videos.zip /home/vuhaibangtk/videos | "
-                  "rm -v /home/vuhaibangtk/videos/* | "
-                  "mv ./videos.zip /home/vuhaibangtk/videos")
+                  "rm -v /home/vuhaibangtk/videos/*")
+        os.system("mv videos.zip /home/vuhaibangtk/videos")
     time.sleep(60*5)
 
