@@ -41,7 +41,7 @@ def handle():
         links_df = pd.read_csv("smile.csv")
         links_df['intro'] = "smile"
     else:
-        FILES = ["funpic", "smile", "dailyjoy", "finfingjoy"]
+        FILES = ["funpic", "smile", "dailyjoy", "finfingjoy", "spreadinglaughter"]
 
         links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:
@@ -85,7 +85,7 @@ def update_repo():
 
 import os
 handle()
-os.system("zip -r videos.zip /home/vuhaibangtk/videos | "
+os.system("zip -r videos.zip /home/vuhaibangtk/videos/ | "
           "rm -v /home/vuhaibangtk/videos/*.mp4 | "
           "mv videos.zip /home/vuhaibangtk/videos")
 while True:
