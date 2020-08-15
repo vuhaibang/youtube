@@ -70,12 +70,12 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
     elif os.path.isdir('/home/vhb/'):
         audio_path = '/home/vhb/PycharmProjects/Project/youtube/audio'
         path_video_out_put = f'/home/vhb/PycharmProjects/Project/videos/{title_video}.mp4'
-        path_intro = '/home/vhb/PycharmProjects/Project/youtube/videos/intro/fun_pic.mp4'
+        path_intro = f'/home/vhb/PycharmProjects/Project/youtube/videos/{intro}/fun_pic.mp4'
         bottom_path = "/home/vhb/PycharmProjects/Project/youtube/service/reup_videos/bottom.png"
     else:
         audio_path = 'C:/Project//youtube/audio'
         path_video_out_put = f'C:/Project/youtube/{title_video}.mp4'
-        path_intro = 'C:/Project/youtube/videos/intro/fun_pic.mp4'
+        path_intro = f'C:/Project/youtube/videos/intro/{intro}.mp4'
         bottom_path = "C:/Project/youtube/service/reup_videos/bottom.png"
 
     clips = []
@@ -115,17 +115,30 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
 
     concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
     list_audio = os.listdir(audio_path)
-    list_audio = [os.path.join(audio_path, l) for l in list_audio]
+    list_audio = [os.path.join(audio_path, l) for l in list_audio if l != 'money.wav']
+    print(list_audio)
     path_audio = random.choice(list_audio)
+    money_audio_path = os.path.join(audio_path, 'money.wav')
     audio = mpe.AudioFileClip(path_audio)
-    audio = mpe.afx.audio_loop(audio, duration=concat_clip.duration - mpe.VideoFileClip(path_intro).duration)
-    audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
-                            audio.set_start(mpe.VideoFileClip(path_intro).duration)])
+    money_audio = mpe.AudioFileClip(money_audio_path)
+
+    if concat_clip.duration > (mpe.VideoFileClip(path_intro).duration + money_audio.duration):
+        audio = mpe.afx.audio_loop(audio,
+                                   duration=concat_clip.duration - mpe.VideoFileClip(
+                                       path_intro).duration - money_audio.duration)
+        audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
+                                        audio.set_start(mpe.VideoFileClip(path_intro).duration),
+                                        money_audio.set_start(mpe.VideoFileClip(path_intro).duration + audio.duration)])
+    else:
+        money_audio = money_audio.set_duration(concat_clip.duration
+                                               - mpe.VideoFileClip(path_intro).duration)
+        audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
+                                        money_audio.set_start(mpe.VideoFileClip(path_intro).duration)])
     print(audio.duration)
     print(concat_clip.duration)
     concat_clip = concat_clip.set_audio(audio)
 
-    concat_clip.write_videofile(path_video_out_put, fps=24, codec='libx264', threads=2)
+    concat_clip.write_videofile(path_video_out_put, fps=1, codec='libx264', threads=2)
 if __name__ == '__main__':
     conn_brightside = sqlite3.connect('./../../database/brightside.db')
     add_audio_in_videos("../../videos/videos/St319/1.mp4", "../../videos/audio/St319/1.mp4", "test.mp4")
