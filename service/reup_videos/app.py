@@ -62,6 +62,11 @@ def resize_center_image_in_video(image_w, image_h, w, h):
 
 
 def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 1080)):
+    DICT = {"funpic": "Funny pics",
+            "smile": "Smile pics",
+            "dailyjoy": "Daily joy",
+            "finfingjoy": "Fin Fing Joy",
+            "spreadinglaughter": "Spreading Laughter"}
     if os.path.isdir('/home/vuhaibangtk/'):
         audio_path = '/home/vuhaibangtk/youtube/audio'
         path_video_out_put = f'/home/vuhaibangtk/videos/{title_video}.mp4'
@@ -83,7 +88,7 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
     for url, des in url_deses:
         duration = min(8.5, max(4.5, len(des)*4.5/50))
         if len(des) < 1:
-            des = "Funy picture"
+            des = DICT[intro]
         line_text, text = replace_space_in_text(des)
         size_text = int(screensize[0] / 33)
 
