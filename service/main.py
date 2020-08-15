@@ -46,10 +46,11 @@ def handle():
         links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:
             try:
-                df = pd.read_csv(f"{file}.csv")
+                df = pd.read_csv(f"{file}.csv", encoding='unicode_escape', engine='python')
                 df['intro'] = file
                 links_df = links_df.append(df, ignore_index=True)
-            except:
+            except Exception as e:
+                print(f"mo file loi {e}")
                 continue
 
     links_df = links_df.sort_values(by=['STT'])
@@ -68,6 +69,7 @@ def loop_df(df):
             print(f"Link {link} da render")
             continue
         if (gen_video(stt, title, link, intro)):
+            print(intro)
             reup_df = reup_df.append(pd.DataFrame({"LINK": [intro + " " + link]}))
         reup_df["LINK"].to_csv("reup_list.csv", index=False)
         if update_repo():
