@@ -65,7 +65,7 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
     if os.path.isdir('/home/vuhaibangtk/'):
         audio_path = '/home/vuhaibangtk/youtube/audio'
         path_video_out_put = f'/home/vuhaibangtk/videos/{title_video}.mp4'
-        path_intro = f'/home/vuhaibangtk/videos/intro/{intro}.mp4'
+        path_intro = f'/home/vuhaibangtk/youtube/videos/intro/{intro}.mp4'
         bottom_path = "/home/vuhaibangtk/youtube/service/reup_videos/bottom.png"
         outtro_path = "/home/vuhaibangtk/youtube/videos/intro/outtro.jpg"
     elif os.path.isdir('/home/vhb/'):
