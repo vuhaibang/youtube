@@ -65,6 +65,7 @@ def loop_df(df):
         link = row['Link']
         intro = row['intro']
         if (intro + " " + link) in reup_df["LINK"].to_list():
+            print(f"Link {link} da render")
             continue
         if (gen_video(stt, title, link, intro)):
             reup_df = reup_df.append(pd.DataFrame({"LINK": [intro + " " + link]}))
