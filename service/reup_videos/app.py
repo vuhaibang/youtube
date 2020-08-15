@@ -87,19 +87,19 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
         size_text = int(screensize[0] / 33)
 
 
-        try:
-            main_image = mpe.ImageClip(url).set_position(('center', 'center')).set_duration(duration)
-            back_ground_image = mpe.ImageClip(url).resize(screensize).set_duration(duration).set_opacity(0.5)
-            txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
-            bottom_image = mpe.ImageClip(bottom_path).resize((screensize[0], line_text * size_text + int(screensize[0]/80)))\
-                .set_duration(duration).set_position("bottom", "center")
-            txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h + int((bottom_image.h - txt_mask.h)/2)))
-            main_image = main_image.resize(
-                resize_center_image_in_video(main_image.w, main_image.h, screensize[0], screensize[1] - bottom_image.h))\
-                .set_position(("center", "top"))
-            clip = mpe.CompositeVideoClip([back_ground_image, main_image, bottom_image, txt_mask])
-        except:
-            continue
+        # try:
+        main_image = mpe.ImageClip(url).set_position(('center', 'center')).set_duration(duration)
+        back_ground_image = mpe.ImageClip(url).resize(screensize).set_duration(duration).set_opacity(0.5)
+        txt_mask = mpe.TextClip(text, font='Amiri-Bold', color='black', fontsize=size_text)
+        bottom_image = mpe.ImageClip(bottom_path).resize((screensize[0], line_text * size_text + int(screensize[0]/80)))\
+            .set_duration(duration).set_position("bottom", "center")
+        txt_mask = txt_mask.set_duration(duration).set_position(("center", screensize[1] - bottom_image.h + int((bottom_image.h - txt_mask.h)/2)))
+        main_image = main_image.resize(
+            resize_center_image_in_video(main_image.w, main_image.h, screensize[0], screensize[1] - bottom_image.h))\
+            .set_position(("center", "top"))
+        clip = mpe.CompositeVideoClip([back_ground_image, main_image, bottom_image, txt_mask])
+        # except:
+        #     continue
         clips.append(clip)
     clips.append(clips[-1].set_duration(6))
 
