@@ -13,24 +13,24 @@ import time
 
 
 def gen_video(stt, title, link, intro):
-    try:
-        _, url_des = get_all_url_image_site_brightside(link)
-        if platform.node() == "smile":
-            title = f"Let's smile: Step {stt} {title}"
-        elif platform.node() == "funpic":
-            title = f"Funny pics: Step {stt} {title}"
-        else:
-            title = f"Funny pics: Step {stt} {title}"
-        print(title)
-        print(link)
-        print(len(url_des))
-        # for url in url_des:
-        #     print(url, "\n")
-        gen_video_from_url_image(url_des, title, intro)
-        return True
+    # try:
+    _, url_des = get_all_url_image_site_brightside(link)
+    if platform.node() == "smile":
+        title = f"Let's smile: Step {stt} {title}"
+    elif platform.node() == "funpic":
+        title = f"Funny pics: Step {stt} {title}"
+    else:
+        title = f"Funny pics: Step {stt} {title}"
+    print(title)
+    print(link)
+    print(len(url_des))
+    # for url in url_des:
+    #     print(url, "\n")
+    gen_video_from_url_image(url_des, title, intro)
+    return True
 
-    except Exception as e:
-        print(f"Loi {e}")
+    # except Exception as e:
+    #     print(f"Loi {e}")
 
 
 def handle():
