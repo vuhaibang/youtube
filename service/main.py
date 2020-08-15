@@ -20,7 +20,12 @@ def gen_video(stt, title, link, intro):
         elif platform.node() == "funpic":
             title = f"Funny pics: Step {stt} {title}"
         else:
-            title = f"Funny pics: Step {stt} {title}"
+            DICT = {"funpic": "Funny pics",
+                    "smile": "Smile pics",
+                    "dailyjoy": "Daily joy",
+                    "finfingjoy": "Fin Fing Joy",
+                    "spreadinglaughter": "Spreading Laughter"}
+            title = f"{DICT[intro]}: Step {stt} {title}"
         print(title)
         print(link)
         print(len(url_des))
