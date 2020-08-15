@@ -101,7 +101,7 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
         except:
             continue
         clips.append(clip)
-    clips.append(clip.set_duration(6))
+    clips.append(clips[-1].set_duration(6))
 
     slided_clips = []
     for num, clip in enumerate(clips):
