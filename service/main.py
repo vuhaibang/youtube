@@ -91,8 +91,10 @@ os.system("mv videos.zip /home/vuhaibangtk/videos")
 while True:
     if update_repo():
         handle()
-        os.system("zip -r videos.zip /home/vuhaibangtk/videos | "
-                  "rm -v /home/vuhaibangtk/videos/*")
-        os.system("mv videos.zip /home/vuhaibangtk/videos")
+        import glob
+        if (glob.glob("/home/vuhaibangtk/videos/*.mp4")):
+            os.system("zip -r videos.zip /home/vuhaibangtk/videos/* | "
+                      "rm -v /home/vuhaibangtk/videos/*")
+            os.system("mv videos.zip /home/vuhaibangtk/videos")
     time.sleep(60*5)
 
