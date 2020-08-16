@@ -8,7 +8,7 @@ import pandas as pd
 import platform
 import git
 import time
-
+import random
 
 
 
@@ -31,6 +31,7 @@ def gen_video(stt, title, link, intro):
         print(len(url_des))
         # for url in url_des:
         #     print(url, "\n")
+        random.shuffle(url_des)
         gen_video_from_url_image(url_des, title, intro)
         return True
 
