@@ -13,13 +13,16 @@ def check_heal():
         links_df = pd.read_csv("smile.csv")
         links_df['intro'] = "smile"
     else:
-        FILES = ["funpic", "smile"]
+        FILES = ["funpic", "smile", "dailyjoy", "finfingjoy", "spreadinglaughter"]
 
         links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:
-            df = pd.read_csv(f"{file}.csv")
-            df['intro'] = file
-            links_df = links_df.append(df, ignore_index=True)
+            try:
+                df = pd.read_csv(f"{file}.csv")
+                df['intro'] = file
+                links_df = links_df.append(df, ignore_index=True)
+            except:
+                pass
         for index, row in links_df.iterrows():
             link = row['Link']
             intro = row['intro']
