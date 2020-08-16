@@ -41,7 +41,7 @@ def gen_video(stt, title, link, intro):
 def handle():
     if platform.node() == "funpic":
         links_df = pd.read_csv("funpic.csv", encoding='unicode_escape', engine='python')
-        links_df['intro'] = "fun_pic"
+        links_df['intro'] = "funpic"
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "smile"

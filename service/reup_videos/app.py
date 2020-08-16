@@ -141,6 +141,9 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
             audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
                                             money_audio.set_start(mpe.VideoFileClip(path_intro).duration)])
     else:
+        audio = mpe.afx.audio_loop(audio,
+                                   duration=concat_clip.duration - mpe.VideoFileClip(
+                                       path_intro).duration)
         audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
                                         audio.set_start(mpe.VideoFileClip(path_intro).duration)])
     print(audio.duration)
