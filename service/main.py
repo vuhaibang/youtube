@@ -40,19 +40,19 @@ def gen_video(stt, title, link, intro):
 
 def handle():
     if platform.node() == "funpic":
-        links_df = pd.read_csv("funpic.csv")
+        links_df = pd.read_csv("funpic.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "fun_pic"
     elif platform.node() == "smile":
-        links_df = pd.read_csv("smile.csv")
+        links_df = pd.read_csv("smile.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "smile"
     elif platform.node() == "dailyjoy":
-        links_df = pd.read_csv("dailyjoy.csv")
+        links_df = pd.read_csv("dailyjoy.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "dailyjoy"
     elif platform.node() == "finfingjoy":
-        links_df = pd.read_csv("finfingjoy.csv")
+        links_df = pd.read_csv("finfingjoy.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "finfingjoy"
     elif platform.node() == "spreadinglaughter":
-        links_df = pd.read_csv("spreadinglaughter.csv")
+        links_df = pd.read_csv("spreadinglaughter.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "spreadinglaughter"
     else:
         FILES = ["funpic", "smile", "dailyjoy", "finfingjoy", "spreadinglaughter"]
@@ -74,7 +74,7 @@ def handle():
 
 def loop_df(df):
     for index, row in df.iterrows():
-        reup_df = pd.read_csv("reup_list.csv")
+        reup_df = pd.read_csv("reup_list.csv", encoding='unicode_escape', engine='python')
         stt = row['STT']
         title = row['Title']
         link = row['Link']
