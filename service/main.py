@@ -45,6 +45,15 @@ def handle():
     elif platform.node() == "smile":
         links_df = pd.read_csv("smile.csv")
         links_df['intro'] = "smile"
+    elif platform.node() == "dailyjoy":
+        links_df = pd.read_csv("dailyjoy.csv")
+        links_df['intro'] = "dailyjoy"
+    elif platform.node() == "finfingjoy":
+        links_df = pd.read_csv("finfingjoy.csv")
+        links_df['intro'] = "finfingjoy"
+    elif platform.node() == "spreadinglaughter":
+        links_df = pd.read_csv("spreadinglaughter.csv")
+        links_df['intro'] = "spreadinglaughter"
     else:
         FILES = ["funpic", "smile", "dailyjoy", "finfingjoy", "spreadinglaughter"]
 
