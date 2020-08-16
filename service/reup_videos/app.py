@@ -122,24 +122,27 @@ def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 
     concat_clip = mpe.concatenate_videoclips(slided_clips, method="compose").resize(screensize)
     list_audio = os.listdir(audio_path)
     list_audio = [os.path.join(audio_path, l) for l in list_audio if l != 'money.wav']
-    print(list_audio)
     path_audio = random.choice(list_audio)
     money_audio_path = os.path.join(audio_path, 'money.wav')
     audio = mpe.AudioFileClip(path_audio)
     money_audio = mpe.AudioFileClip(money_audio_path)
 
-    if concat_clip.duration > (mpe.VideoFileClip(path_intro).duration + money_audio.duration):
-        audio = mpe.afx.audio_loop(audio,
-                                   duration=concat_clip.duration - mpe.VideoFileClip(
-                                       path_intro).duration - money_audio.duration)
-        audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
-                                        audio.set_start(mpe.VideoFileClip(path_intro).duration),
-                                        money_audio.set_start(mpe.VideoFileClip(path_intro).duration + audio.duration)])
+    if intro == "dailyjoy":
+        if concat_clip.duration > (mpe.VideoFileClip(path_intro).duration + money_audio.duration):
+            audio = mpe.afx.audio_loop(audio,
+                                       duration=concat_clip.duration - mpe.VideoFileClip(
+                                           path_intro).duration - money_audio.duration)
+            audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
+                                            audio.set_start(mpe.VideoFileClip(path_intro).duration),
+                                            money_audio.set_start(mpe.VideoFileClip(path_intro).duration + audio.duration)])
+        else:
+            money_audio = money_audio.set_duration(concat_clip.duration
+                                                   - mpe.VideoFileClip(path_intro).duration)
+            audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
+                                            money_audio.set_start(mpe.VideoFileClip(path_intro).duration)])
     else:
-        money_audio = money_audio.set_duration(concat_clip.duration
-                                               - mpe.VideoFileClip(path_intro).duration)
         audio = mpe.CompositeAudioClip([mpe.VideoFileClip(path_intro).audio,
-                                        money_audio.set_start(mpe.VideoFileClip(path_intro).duration)])
+                                        audio.set_start(mpe.VideoFileClip(path_intro).duration)])
     print(audio.duration)
     print(concat_clip.duration)
     concat_clip = concat_clip.set_audio(audio)

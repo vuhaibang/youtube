@@ -26,7 +26,8 @@ def get_all_url_image_site_brightside(url_site):
                 des = data.split('"\\u003c')[1]\
                     .split("}}")[0]
                 des = re.sub(r"h3 style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|\\n|"
-                             r"ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|\&\#[^\s]*|h3.class\=[^\s]+|style\=[^\s]+", "", des)\
+                             r"ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|\&\#[^\s]*|h3.class\=[^\s]+|style\=[^\s]+|"
+                             r"p\s[0-9]+px\;|line-height:\s[0-9]+px\;|\\\\\"\>", "", des)\
                     .strip().strip('"').strip("'")
                 des = re.sub(r"\s+", " ", des)
                 des = re.sub(r"^[0-9]+\s{0,1}\.", "",des)
@@ -40,12 +41,15 @@ def get_all_url_image_site_brightside(url_site):
                 data = re.sub(r"\\u003ca.*\\u003c\/a\>", "", data)
                 data = re.findall(r"\\u003cp\>(.*)\\u003c\/p\>", data)[0]
                 data = re.sub(r"h[0-9] style[^\s]*|\\u0.{0,10}\>|center;\\\"\>|\\u00[^\s]*|href=[^\s]*|target=[^\s]*|"
-                              r"\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|h3.class\=[^\s]+|style\=[^\s]+", "", data)\
+                              r"\\n|ul>|h[0-9]>|p\>|h[0-9] align=[^\s]*|\&quot\;|h3.class\=[^\s]+|style\=[^\s]+|"
+                              r"p\s[0-9]+px\;|line-height:\s[0-9]+px\;|\\\\\"\>", "", data)\
                     .strip().strip('"').strip("'").strip('“')
                 data = re.sub(r"\s+", " ", data).strip("”").strip("“")
                 result[-1][1] += data
         except:
             pass
+    for r in result:
+        r[1] = re.sub("(p\s)*[0-9]+px\;|line-height:\s[0-9]+px\;|\s*text-align:\s*|\\\\|\"\>", "", r[1])
     return title, result
 
 
