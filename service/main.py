@@ -23,8 +23,8 @@ def gen_video(stt, title, link, intro):
             DICT = {"funpic": "Funny pics",
                     "smile": "Smile pics",
                     "dailyjoy": "Daily joy",
-                    "finfingjoy": "Fin Fing Joy",
-                    "spreadinglaughter": "Spreading Laughter"}
+                    "findingjoy": "Finding Joy",
+                    "happymonkey": "Happy Monkey"}
             title = f"{DICT[intro]}: Step {stt} {title}"
         print(title)
         print(link)
@@ -40,29 +40,34 @@ def gen_video(stt, title, link, intro):
 
 
 def handle():
-    if platform.node() == "funpic":
+    name = platform.node()
+    print(name)
+    name = 'findingjoy'
+    if name == "funpic":
         links_df = pd.read_csv("funpic.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "funpic"
-    elif platform.node() == "smile":
+    elif name == "smile":
         links_df = pd.read_csv("smile.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "smile"
-    elif platform.node() == "dailyjoy":
+    elif name == "dailyjoy":
         links_df = pd.read_csv("dailyjoy.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "dailyjoy"
-    elif platform.node() == "finfingjoy":
-        links_df = pd.read_csv("finfingjoy.csv", encoding='unicode_escape', engine='python')
-        links_df['intro'] = "finfingjoy"
-    elif platform.node() == "spreadinglaughter":
-        links_df = pd.read_csv("spreadinglaughter.csv", encoding='unicode_escape', engine='python')
-        links_df['intro'] = "spreadinglaughter"
+    elif name == "findingjoy":
+        links_df = pd.read_csv("findingjoy.csv", encoding='unicode_escape', engine='python')
+        links_df['intro'] = "findingjoy"
+    elif name == "happymonkey":
+        links_df = pd.read_csv("happymonkey.csv", encoding='unicode_escape', engine='python')
+        links_df['intro'] = "happymonkey"
     else:
-        FILES = ["funpic", "smile", "dailyjoy", "finfingjoy", "spreadinglaughter"]
+        FILES = ["funpic", "smile", "dailyjoy", "findingjoy", "happymonkey"]
 
         links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:
             try:
                 df = pd.read_csv(f"{file}.csv", encoding='unicode_escape', engine='python')
+                df.columns = ['STT', 'Title', 'Link']
                 df['intro'] = file
+                print(df['Title'])
                 links_df = links_df.append(df, ignore_index=True)
             except Exception as e:
                 print(f"mo file loi {e}")
@@ -83,12 +88,11 @@ def loop_df(df):
         if (intro + " " + link) in reup_df["LINK"].to_list():
             print(f"Link {link} da render")
             continue
+        print(f"Render link {link}")
         if (gen_video(stt, title, link, intro)):
             print(intro)
-            reup_df = reup_df.append(pd.DataFrame({"LINK": [intro + " " + link]}))
+        reup_df = reup_df.append(pd.DataFrame({"LINK": [intro + " " + link]}))
         reup_df["LINK"].to_csv("reup_list.csv", index=False)
-        if update_repo():
-            handle()
 
 
 def update_repo():
@@ -103,16 +107,14 @@ def update_repo():
 
 import os
 handle()
-os.system("zip -r videos.zip /home/vuhaibangtk/videos/* | "
-          "rm -v /home/vuhaibangtk/videos/*")
+os.system("zip -r videos.zip /home/vuhaibangtk/videos/*")
 os.system("mv videos.zip /home/vuhaibangtk/videos")
 while True:
     if update_repo():
         handle()
         import glob
         if (glob.glob("/home/vuhaibangtk/videos/*.mp4")):
-            os.system("zip -r videos.zip /home/vuhaibangtk/videos/* | "
-                      "rm -v /home/vuhaibangtk/videos/*")
+            os.system("zip -r videos.zip /home/vuhaibangtk/videos/*")
             os.system("mv videos.zip /home/vuhaibangtk/videos")
     time.sleep(60*5)
 
