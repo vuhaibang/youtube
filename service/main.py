@@ -42,7 +42,6 @@ def gen_video(stt, title, link, intro):
 def handle():
     name = platform.node()
     print(name)
-    name = 'findingjoy'
     if name == "funpic":
         links_df = pd.read_csv("funpic.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "funpic"
