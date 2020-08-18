@@ -24,7 +24,8 @@ def gen_video(stt, title, link, intro):
                     "smile": "Smile pics",
                     "dailyjoy": "Daily joy",
                     "findingjoy": "Finding Joy",
-                    "happymonkey": "Happy Monkey"}
+                    "happymonkey": "Happy Monkey",
+                    "strangerbanana": "Stranger Banana"}
             title = f"{DICT[intro]}: Step {stt} {title}"
         print(title)
         print(link)
@@ -58,7 +59,7 @@ def handle():
         links_df = pd.read_csv("happymonkey.csv", encoding='unicode_escape', engine='python')
         links_df['intro'] = "happymonkey"
     else:
-        FILES = ["funpic", "smile", "dailyjoy", "findingjoy", "happymonkey"]
+        FILES = ["funpic", "smile", "dailyjoy", "findingjoy", "happymonkey", "strangerbanana"]
 
         links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:

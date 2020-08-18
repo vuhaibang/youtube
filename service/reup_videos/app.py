@@ -61,12 +61,13 @@ def resize_center_image_in_video(image_w, image_h, w, h):
     return (image_w, image_h)
 
 
-def gen_video_from_url_image(url_deses, title_video, intro, screensize = (1920, 1080)):
+def gen_video_from_url_image(url_deses, title_video, intro, screensize=(1920, 1080)):
     DICT = {"funpic": "Funny pics",
             "smile": "Smile pics",
             "dailyjoy": "Daily joy",
             "findingjoy": "Finding Joy",
-            "happymonkey": "Happy Monkey"}
+            "happymonkey": "Happy Monkey",
+            "strangerbanana": "Stranger Banana"}
     if os.path.isdir('/home/vuhaibangtk/'):
         audio_path = '/home/vuhaibangtk/youtube/audio'
         path_video_out_put = f'/home/vuhaibangtk/videos/{title_video}.mp4'
