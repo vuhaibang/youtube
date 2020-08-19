@@ -13,7 +13,7 @@ def check_heal():
         links_df = pd.read_csv("smile.csv")
         links_df['intro'] = "smile"
     else:
-        FILES = ["funpic", "smile", "dailyjoy", "finfingjoy", "spreadinglaughter"]
+        FILES = ["funpic", "smile", "dailyjoy", "findingjoy", "happymonkey", "strangerbanana"]
 
         links_df = pd.DataFrame({"STT": [], "Title": [], "Link": [], "intro": []})
         for file in FILES:
